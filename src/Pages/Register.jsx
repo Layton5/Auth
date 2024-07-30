@@ -16,16 +16,17 @@ export const Register = () => {
     try {
       await register(firstName, lastName, email, password);
       alert("User registered successfully");
-      navigate("/login"); // Redirect to login after successful registration
+      navigate("/");
     } catch (error) {
-      alert("Error registering user");
+      console.error(error);
+      // alert("Error registering user");
     }
   };
 
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: "70vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

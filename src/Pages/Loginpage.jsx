@@ -14,7 +14,7 @@ export const Loginpage = () => {
       const response = await login(email, password);
       localStorage.setItem("token", response.data.token);
       alert("User logged in successfully");
-      navigate("/Community");
+      navigate("/Dashboard");
     } catch (error) {
       // alert("Error logging in user");
       console.log(error);
