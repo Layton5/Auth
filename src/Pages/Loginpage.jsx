@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../services/api";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
-
+import { PathConstants } from "../route/pathConstant";
 export const Loginpage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,9 +12,8 @@ export const Loginpage = () => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      localStorage.setItem("token", response.data.token);
-      alert("User logged in successfully");
-      navigate("/Dashboard");
+      localStorage.setItem("token", response.data.data.token);
+      navigate(PathConstants.Dashboard.path);
     } catch (error) {
       // alert("Error logging in user");
       console.log(error);

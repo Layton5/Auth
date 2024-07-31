@@ -6,15 +6,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
 
 import Logo from "../assets/logo.svg";
 import { NavLink } from "react-router-dom";
 import {
   Dashboard,
   LogoutOutlined,
-  MessageOutlined,
-  NotificationAddOutlined,
+  VerifiedUserOutlined,
   People,
+  FollowTheSigns,
 } from "@mui/icons-material";
 
 export const Sidebar = () => {
@@ -25,33 +26,36 @@ export const Sidebar = () => {
       link: "/Dashboard",
     },
     {
+      name: "Users",
+      icon: <VerifiedUserOutlined />,
+      link: "/Users",
+    },
+    {
       name: "Friends",
       icon: <People />,
-      link: "/Community",
+      link: "/Friends",
     },
     {
-      name: "Messages",
-      icon: <MessageOutlined />,
-      link: "/Message",
-    },
-    {
-      name: "Notifications",
-      icon: <NotificationAddOutlined />,
-      link: "/Notification",
-    },
-    {
-      name: "Logout",
-      icon: <LogoutOutlined />,
-      link: "/",
+      name: "Followers",
+      icon: <FollowTheSigns />,
+      link: "/Followers",
     },
   ];
+  const navigate = useNavigate();
+  const signOut = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <Box sx={{ maxWidth: 240, bgcolor: "background.paper", height: "100vh" }}>
       <List>
         <img src={Logo} alt="" />
         <Divider />
         {access.map((item, index) => (
-          <NavLink to={item.link}>
+          <NavLink
+            to={item.link}
+            style={{ textDecoration: "none", textDecorationColor: "none" }}
+          >
             <ListItem key={item} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
@@ -60,6 +64,14 @@ export const Sidebar = () => {
             </ListItem>
           </NavLink>
         ))}
+        <ListItem disablePadding>
+          <ListItemButton onClick={signOut}>
+            <ListItemIcon>
+              <LogoutOutlined />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );

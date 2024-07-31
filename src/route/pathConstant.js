@@ -16,16 +16,13 @@ export const PathConstants = {
     name: "Friends",
     path: "/friends",
   },
-  Community: {
-    name: "Community",
-    path: "/community",
+
+  Followers: {
+    name: "Followers",
+    path: "/Followers",
   },
-  Notification: {
-    name: "Notification",
-    path: "/Notification",
-  },
-  Message: {
-    name: "Messages",
-    path: "/Message",
+  Users: {
+    name: "Users",
+    path: "/Users",
   },
 };

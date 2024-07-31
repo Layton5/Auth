@@ -6,18 +6,35 @@ import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import { Sidebar } from "../Pages/Sidebar";
 import { Appbar } from "../Pages/Appbar";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getMe } from "../services/api";
 const drawerWidth = 240;
 
 export const MainLayout = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const [user, setUser] = useState({});
+
+  const getAndSetUser = async () => {
+    const user = await getMe();
+    console.log("user", user);
+    setUser(user.data.data);
+  };
 
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
   };
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) navigate("/");
+    if (token) {
+      getAndSetUser();
+    }
+  }, []);
 
   const handleDrawerTransitionEnd = () => {
     setIsClosing(false);
@@ -37,7 +54,7 @@ export const MainLayout = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Appbar />
+      <Appbar user={user} />
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

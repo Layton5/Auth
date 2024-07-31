@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { Avatar, IconButton } from "@mui/material";
 
-export default function FadeMenu() {
+export default function FadeMenu({ userName }) {
   const numberOfFollowers = 20;
   const numberOfFriends = 5;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,7 +27,7 @@ export default function FadeMenu() {
         onClick={handleClick}
       >
         <IconButton aria-label="settings">
-          <Avatar alt="Bruce " src="/" />
+          <Avatar alt={userName} src="/" />
         </IconButton>
       </Button>
       <Menu

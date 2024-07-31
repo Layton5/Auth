@@ -17,6 +17,12 @@ export const Appbar = (props) => {
     }
   };
 
+  const userName = () => {
+    return props?.user?.firstName && props?.user?.lastName
+      ? props.user.firstName + " " + props.user.lastName
+      : null;
+  };
+
   return (
     <>
       <AppBar
@@ -46,13 +52,13 @@ export const Appbar = (props) => {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            Welcome Bruce
+            {userName() && <>Welcome {userName()}</>}
           </Typography>
           <Box display="flex" sx={{ justifyItems: "center" }}>
             <Tooltip title="Profile">
               <IconButton sx={{ p: 0, ml: 4 }}>
-                <Avatar alt="Bruce" src="/static/images/avatar/2.jpg">
-                  <FadeMenu />
+                <Avatar alt={userName()}>
+                  <FadeMenu userName={userName()} />
                 </Avatar>
               </IconButton>
             </Tooltip>

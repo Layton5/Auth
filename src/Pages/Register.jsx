@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { register } from "../services/api";
+import { PathConstants } from "../route/pathConstant";
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,9 +15,9 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(firstName, lastName, email, password);
-      alert("User registered successfully");
-      navigate("/");
+      const response = await register(firstName, lastName, email, password);
+      localStorage.setItem("token", response.data.data.token);
+      navigate(PathConstants.Dashboard.path);
     } catch (error) {
       console.error(error);
       // alert("Error registering user");

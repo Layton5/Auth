@@ -5,16 +5,17 @@ import { authRoutes } from "./auth";
 import { PathConstants } from "./pathConstant";
 import { Board } from "../components/Dashboard";
 import Notification from "../components/Notification";
-import Community from "../components/Community";
-import Message from "../components/Message";
+import Friends from "../components/Friends";
+import Users from "../components/Users";
 
 // import route icons
 import {
   Dashboard,
-  MessageOutlined,
-  NotificationAddOutlined,
+  FollowTheSigns,
   PeopleAltOutlined,
+  VerifiedUserOutlined,
 } from "@mui/icons-material";
+import Followers from "../components/Followers";
 
 export const router = createBrowserRouter([
   {
@@ -33,25 +34,25 @@ export const router = createBrowserRouter([
         icon: <Dashboard />,
       },
       {
-        name: PathConstants.Community.name,
-        path: PathConstants.Community.path,
-        element: <Community />,
+        name: PathConstants.Friends.name,
+        path: PathConstants.Friends.path,
+        element: <Friends />,
         showInMenu: true,
         icon: <PeopleAltOutlined />,
       },
       {
-        name: PathConstants.Notification.name,
-        path: PathConstants.Notification.path,
-        element: <Notification />,
+        name: PathConstants.Followers.name,
+        path: PathConstants.Followers.path,
+        element: <Followers />,
         showInMenu: true,
-        icon: <NotificationAddOutlined />,
+        icon: <FollowTheSigns />,
       },
       {
-        name: PathConstants.Message.name,
-        path: PathConstants.Message.path,
-        element: <Message />,
+        name: PathConstants.Users.name,
+        path: PathConstants.Users.path,
+        element: <Users />,
         showInMenu: true,
-        icon: <MessageOutlined />,
+        icon: <VerifiedUserOutlined />,
       },
     ],
   },
