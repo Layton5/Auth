@@ -3,8 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
-import { IconButton } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Avatar, IconButton } from "@mui/material";
 
 export default function FadeMenu() {
   const numberOfFollowers = 20;
@@ -27,11 +26,9 @@ export default function FadeMenu() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        {
-          <IconButton aria-label="settings">
-            {/* <MoreVertIcon /> */}
-          </IconButton>
-        }
+        <IconButton aria-label="settings">
+          <Avatar alt="Bruce " src="/" />
+        </IconButton>
       </Button>
       <Menu
         id="fade-menu"
@@ -45,7 +42,7 @@ export default function FadeMenu() {
       >
         <MenuItem onClick={handleClose}>Followers-{numberOfFollowers}</MenuItem>
         <MenuItem onClick={handleClose}>Friends-{numberOfFriends}</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Settings</MenuItem>
       </Menu>
     </div>
   );

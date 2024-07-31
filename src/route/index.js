@@ -1,22 +1,20 @@
 import { createBrowserRouter, useLocation } from "react-router-dom";
 import { AuthLayout } from "../Layout/auth";
 import { MainLayout } from "../Layout/main";
-
 import { authRoutes } from "./auth";
 import { PathConstants } from "./pathConstant";
 import { Board } from "../components/Dashboard";
-
 import Notification from "../components/Notification";
+import Community from "../components/Community";
+import Message from "../components/Message";
 
 // import route icons
 import {
   Dashboard,
   MessageOutlined,
   NotificationAddOutlined,
+  PeopleAltOutlined,
 } from "@mui/icons-material";
-import { PeopleAltOutlined } from "@mui/icons-material";
-import Community from "../components/Community";
-import Message from "../components/Message";
 
 export const router = createBrowserRouter([
   {

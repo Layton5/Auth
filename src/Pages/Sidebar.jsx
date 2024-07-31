@@ -6,10 +6,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+
 import Logo from "../assets/logo.svg";
 import { NavLink } from "react-router-dom";
 import {
   Dashboard,
+  LogoutOutlined,
   MessageOutlined,
   NotificationAddOutlined,
   People,
@@ -36,6 +38,11 @@ export const Sidebar = () => {
       name: "Notifications",
       icon: <NotificationAddOutlined />,
       link: "/Notification",
+    },
+    {
+      name: "Logout",
+      icon: <LogoutOutlined />,
+      link: "/",
     },
   ];
   return (
