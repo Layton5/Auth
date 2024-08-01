@@ -1,15 +1,26 @@
-// src/components/Register.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { useNavigate, NavLink } from "react-router-dom";
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  IconButton,
+  InputAdornment,
+  Alert,
+} from "@mui/material";
 import { register } from "../services/api";
 import { PathConstants } from "../route/pathConstant";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,9 +30,19 @@ export const Register = () => {
       localStorage.setItem("token", response.data.data.token);
       navigate(PathConstants.Dashboard.path);
     } catch (error) {
+      setError(
+        "Error registering user. Please check your inputs and try again."
+      );
       console.error(error);
-      // alert("Error registering user");
     }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -47,6 +68,11 @@ export const Register = () => {
           <Typography component="h1" variant="h5" sx={{ color: "black" }}>
             Register
           </Typography>
+          {error && (
+            <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
+              {error}
+            </Alert>
+          )}
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -94,13 +120,26 @@ export const Register = () => {
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               InputLabelProps={{ style: { color: "black" } }}
-              InputProps={{ style: { color: "black" } }}
+              InputProps={{
+                style: { color: "black" },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               type="submit"
@@ -110,6 +149,19 @@ export const Register = () => {
             >
               Register
             </Button>
+            <NavLink
+              to="/"
+              variant="body2"
+              style={{
+                display: "block",
+                textAlign: "center",
+                marginTop: "1rem",
+                color: "black",
+                textDecoration: "none",
+              }}
+            >
+              Already have an account? Sign In
+            </NavLink>
           </Box>
         </Box>
       </Container>

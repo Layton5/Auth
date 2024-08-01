@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../services/api";
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  Alert,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { PathConstants } from "../route/pathConstant";
+
 export const Loginpage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -15,9 +28,19 @@ export const Loginpage = () => {
       localStorage.setItem("token", response.data.data.token);
       navigate(PathConstants.Dashboard.path);
     } catch (error) {
-      // alert("Error logging in user");
-      console.log(error);
+      setError(
+        "Error logging in user. Please check your credentials and try again."
+      );
+      console.error(error);
     }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -33,6 +56,11 @@ export const Loginpage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error && (
+          <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
+            {error}
+          </Alert>
+        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -40,8 +68,8 @@ export const Loginpage = () => {
             fullWidth
             id="email"
             label="Email"
-            name="Email"
-            autoComplete="Email"
+            name="email"
+            autoComplete="email"
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -52,11 +80,24 @@ export const Loginpage = () => {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             type="submit"
@@ -67,13 +108,14 @@ export const Loginpage = () => {
             Sign In
           </Button>
           <NavLink
-            to="./Register"
+            to="/register"
             variant="body2"
-            sx={{
+            style={{
               display: "block",
               textAlign: "center",
-              mt: 2,
+              marginTop: "1rem",
               color: "black",
+              textDecoration: "none",
             }}
           >
             Don't have an account? Sign Up
