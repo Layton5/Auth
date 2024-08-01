@@ -4,9 +4,10 @@ import { MainLayout } from "../Layout/main";
 import { authRoutes } from "./auth";
 import { PathConstants } from "./pathConstant";
 import { Board } from "../components/Dashboard";
-import Notification from "../components/Notification";
+
 import Friends from "../components/Friends";
 import Users from "../components/Users";
+import Followers from "../components/Followers";
 
 // import route icons
 import {
@@ -15,7 +16,6 @@ import {
   PeopleAltOutlined,
   VerifiedUserOutlined,
 } from "@mui/icons-material";
-import Followers from "../components/Followers";
 
 export const router = createBrowserRouter([
   {

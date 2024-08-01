@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import {
   Avatar,
   ListItem,
@@ -35,13 +36,16 @@ export default function Friends() {
                 secondary={
                   <React.Fragment>
                     <Typography
-                      sx={{ display: "inline" }}
+                      sx={{ display: "grid" }}
                       component="span"
                       variant="body2"
                       color="text.primary"
                     >
                       Sandra Adams
                     </Typography>
+                    <Button variant="contained" color="error" size="small">
+                      Remove
+                    </Button>
                   </React.Fragment>
                 }
               />

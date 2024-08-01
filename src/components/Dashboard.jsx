@@ -5,12 +5,13 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { FollowButton, AddButton } from "./userButton";
-import { Stack } from "@mui/material";
-import FadeMenu from "./userInput";
-export const Board = () => {
-  const user = "Bruce Oswald";
-  const followers = 100;
+
+export const Board = (props) => {
+  const userName = () => {
+    return props?.user?.firstName && props?.user?.lastName
+      ? `${props.user.firstName} ${props.user.lastName}`
+      : null;
+  };
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <ListItem alignItems="flex-start">
@@ -19,7 +20,7 @@ export const Board = () => {
         </ListItemAvatar>
 
         <ListItemText
-          primary={user}
+          primary={userName() ? `Welcome ${userName()}` : ""}
           secondary={
             <React.Fragment>
               <Typography
@@ -28,14 +29,8 @@ export const Board = () => {
                 variant="body2"
                 color="text.primary"
               >
-                {followers} followers
-                <FadeMenu />
+                Followers
               </Typography>
-
-              <Stack spacing={2} direction="row">
-                <FollowButton />
-                <AddButton />
-              </Stack>
             </React.Fragment>
           }
         />
