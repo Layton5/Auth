@@ -31,7 +31,7 @@ export const Register = () => {
       navigate(PathConstants.Dashboard.path);
     } catch (error) {
       setError(
-        "Error registering user. Please check your inputs and try again."
+        "Error registering user. Please check your input Details and try again."
       );
       console.error(error);
     }

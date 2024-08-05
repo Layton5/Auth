@@ -12,7 +12,6 @@ import { getMe } from "../services/api";
 const drawerWidth = 240;
 
 export const MainLayout = (props) => {
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [user, setUser] = useState({});
