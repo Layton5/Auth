@@ -1,4 +1,4 @@
-import { createBrowserRouter, useLocation } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { AuthLayout } from "../Layout/auth";
 import { MainLayout } from "../Layout/main";
 import { authRoutes } from "./auth";

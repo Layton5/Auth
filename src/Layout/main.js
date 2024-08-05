@@ -33,10 +33,11 @@ export const MainLayout = (props) => {
     if (token) {
       getAndSetUser();
     }
-  }, []);
+  }, [navigate]);
 
   const handleDrawerTransitionEnd = () => {
     setIsClosing(false);
+    isClosing(true);
   };
 
   const drawer = (
