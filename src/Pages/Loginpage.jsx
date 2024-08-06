@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../services/api";
-import {
-  TextField,
-  Button,
-  Container,
-  Typography,
-  Box,
-  Alert,
-  IconButton,
-  InputAdornment,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { PathConstants } from "../route/pathConstant";
 
 export const Loginpage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -28,19 +16,8 @@ export const Loginpage = () => {
       localStorage.setItem("token", response.data.data.token);
       navigate(PathConstants.Dashboard.path);
     } catch (error) {
-      setError(
-        "Error logging in user. Please check your credentials and try again."
-      );
-      console.error(error);
+      console.log("Error logging in", error);
     }
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -56,11 +33,6 @@ export const Loginpage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        {error && (
-          <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
-            {error}
-          </Alert>
-        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -80,24 +52,11 @@ export const Loginpage = () => {
             fullWidth
             name="password"
             label="Password"
-            type={showPassword ? "text" : "password"}
+            type="password"
             id="password"
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
           />
           <Button
             type="submit"
