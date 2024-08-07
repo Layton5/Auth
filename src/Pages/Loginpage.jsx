@@ -1,22 +1,36 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../services/api";
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  Alert,
+} from "@mui/material";
 import { PathConstants } from "../route/pathConstant";
 
 export const Loginpage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     try {
       const response = await login(email, password);
       localStorage.setItem("token", response.data.data.token);
       navigate(PathConstants.Dashboard.path);
     } catch (error) {
-      console.log("Error logging in", error);
+      console.error("Error logging in", error);
+      setError("Login failed. Please check your credentials and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,6 +47,11 @@ export const Loginpage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error && (
+          <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
+            {error}
+          </Alert>
+        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -63,12 +82,12 @@ export const Loginpage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </Button>
           <NavLink
             to="/register"
-            variant="body2"
             style={{
               display: "block",
               textAlign: "center",

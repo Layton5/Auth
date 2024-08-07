@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import {
   Dashboard,
