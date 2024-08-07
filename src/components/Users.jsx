@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { getAllUser } from "../services/api";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,35 +22,52 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Users() {
+  const [users, setUsers] = React.useState([]);
+
+  const getAndSetUsers = async () => {
+    const users = await getAllUser();
+    console.log("users", users);
+    setUsers(users.data.data);
+  };
+
+  React.useEffect(() => {
+    getAndSetUsers();
+  }, []);
   return (
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={4}>
-          <Item>
-            {" "}
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Paul" src="/static/images/avatar/3.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Paul Razak"
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: "grid" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      Sandra Adams
-                    </Typography>
-                    <RequestButton />
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-          </Item>
-        </Grid>
+        {users.map((user, i) => {
+          return (
+            <Grid item xs={4} key={user.id}>
+              <Item>
+                {" "}
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={user.firstName}
+                      src="/static/images/avatar/3.jpg"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: "grid" }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          {user.firstName} {user.lastName}
+                        </Typography>
+                        <RequestButton />
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+              </Item>
+            </Grid>
+          );
+        })}
         {/* <Grid item xs={6}>
           <Item>2</Item>
         </Grid>

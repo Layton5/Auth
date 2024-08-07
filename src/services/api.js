@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const getAxiosInstance = () => {
   const token = localStorage.getItem("token");
-  console.log("Token retrieved from localStorage:", token);
+  // console.log("Token retrieved from localStorage:", token);
   return axios.create({
     baseURL: API_URL,
     headers: {
@@ -32,4 +32,9 @@ export const login = async (email, password) => {
 export const getMe = async () => {
   const axiosInstance = getAxiosInstance();
   return axiosInstance.get("/auth/me");
+};
+
+export const getAllUser = async () => {
+  const axiosInstance = getAxiosInstance();
+  return axiosInstance.get("/users/all");
 };
