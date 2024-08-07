@@ -68,16 +68,6 @@ export default function Users() {
             </Grid>
           );
         })}
-        {/* <Grid item xs={6}>
-          <Item>2</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>3</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>4</Item>
-        </Grid>
-        */}
       </Grid>
     </Box>
   );
