@@ -24,7 +24,7 @@ export default function Friends() {
   return (
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Item>
             {" "}
             <ListItem alignItems="flex-start">

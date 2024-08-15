@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import { addFriend } from "../services/api";
 
 export const FollowButton = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -15,11 +16,15 @@ export const FollowButton = () => {
   );
 };
 
-export const AddButton = () => {
+export const AddButton = (userId, type) => {
   const [buttonText, setButtonText] = useState("Add Friend");
 
-  const handleClick = () => {
-    setButtonText("Request Sent");
+  const handleClick = (userId, type) => {
+    addFriend(userId, type);
+    console.log(userId, type);
+
+    // setIsClicked((prevIsClicked) => !prevIsClicked);
+    // setButtonText("Request Sent");
   };
 
   return (

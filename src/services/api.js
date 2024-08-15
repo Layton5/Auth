@@ -38,3 +38,11 @@ export const getAllUser = async () => {
   const axiosInstance = getAxiosInstance();
   return axiosInstance.get("/users/all");
 };
+
+export const addFriend = async (userId, type) => {
+  const axiosInstance = getAxiosInstance();
+  return axiosInstance.post("/relationships/add-relation", {
+    type: type,
+    userId: userId,
+  });
+};

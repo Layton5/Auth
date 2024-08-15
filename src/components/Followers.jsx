@@ -25,7 +25,7 @@ export default function Followers() {
   return (
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Item>
             {" "}
             <ListItem alignItems="flex-start">
@@ -54,16 +54,6 @@ export default function Followers() {
             </ListItem>
           </Item>
         </Grid>
-        {/* <Grid item xs={6}>
-          <Item>2</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>3</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>4</Item>
-        </Grid>
-        */}
       </Grid>
     </Box>
   );
